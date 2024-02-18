@@ -1,3 +1,4 @@
+import argparse
 import os
 import random
 import string
@@ -58,10 +59,17 @@ def create_random_files(filenames):
             f.write("")
 
 def main():
-    # random_filenames = generate_random_filenames(12)
+    # random_filenames = generate_random_filenames(100)
     # create_random_files(random_filenames)
+    parser = argparse.ArgumentParser(
+        prog="pyDir.py",
+        description="Lists contents of directory"
+    )
+    parser.add_argument("-d", "--dir", required=True, help="target directory")
+    parser.add_argument("-a", "--across", action="store_true", help="sort across instead of vertically")
+    args = parser.parse_args()
     size = os.get_terminal_size()
-    print_files(os.listdir("./"), size.lines, size.columns, sort_across=False)
+    print_files(os.listdir(args.dir), size.lines, size.columns, sort_across=args.across)
 
 if __name__ == "__main__":
     main()
