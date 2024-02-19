@@ -51,7 +51,7 @@ def create_random_files(num_files):
             f.write("")
 
 def main(dir, across=False):
-    create_random_files(400)
+    # create_random_files(400)
     size = os.get_terminal_size()
     print_files(os.listdir(dir), size.lines, size.columns, sort_across=across)
 
