@@ -47,7 +47,7 @@ def create_random_files(num_files):
             fn.append(string.ascii_letters[i])
         # filename ends with .t so that we can easily delete by extension
         fn.append(".t")
-        with open(fn, "w") as f:
+        with open("".join(fn), "w") as f:
             f.write("")
 
 def main(dir, across=False):
