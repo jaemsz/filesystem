@@ -24,9 +24,7 @@ def print_files(files, rows, cols, sort_across=False):
                 i = row_idx + max_rows * col_idx
                 if i < file_cnt:
                     print(files[i].ljust(num_chars_per_col, " "), end="")
-                else:
-                    # no more filenames to process
-                    break
+                else: break # no more files to process
                 col_idx += 1
             print()
             row_idx += 1
@@ -58,9 +56,13 @@ def create_random_files(filenames):
         with open(fn, 'w') as f:
             f.write("")
 
-def main():
-    # random_filenames = generate_random_filenames(100)
+def main(dir, across=False):
+    # random_filenames = generate_random_filenames(400)
     # create_random_files(random_filenames)
+    size = os.get_terminal_size()
+    print_files(os.listdir(dir), size.lines, size.columns, sort_across=across)
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="pyDir.py",
         description="Lists contents of directory"
@@ -68,8 +70,4 @@ def main():
     parser.add_argument("-d", "--dir", required=True, help="target directory")
     parser.add_argument("-a", "--across", action="store_true", help="sort across instead of vertically")
     args = parser.parse_args()
-    size = os.get_terminal_size()
-    print_files(os.listdir(args.dir), size.lines, size.columns, sort_across=args.across)
-
-if __name__ == "__main__":
-    main()
+    main(args.dir, args.across)
