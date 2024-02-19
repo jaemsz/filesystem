@@ -38,27 +38,20 @@ def print_files(files, rows, cols, sort_across=False):
                 col_idx += 1
             print()
 
-def generate_random_filenames(num_files):
-    random_filenames = []
+def create_random_files(num_files):
     for _ in range(num_files):
         fn_len = random.randrange(5, 40)
-        s = []
+        fn = []
         for _ in range(fn_len):
             i = random.randrange(len(string.ascii_letters))
-            s.append(string.ascii_letters[i])
+            fn.append(string.ascii_letters[i])
         # filename ends with .t so that we can easily delete by extension
-        s.append(".t")
-        random_filenames.append("".join(s))
-    return random_filenames
-
-def create_random_files(filenames):
-    for fn in filenames:
-        with open(fn, 'w') as f:
+        fn.append(".t")
+        with open(fn, "w") as f:
             f.write("")
 
 def main(dir, across=False):
-    # random_filenames = generate_random_filenames(400)
-    # create_random_files(random_filenames)
+    # create_random_files(400)
     size = os.get_terminal_size()
     print_files(os.listdir(dir), size.lines, size.columns, sort_across=across)
 
