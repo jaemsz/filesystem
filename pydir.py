@@ -23,7 +23,7 @@ def print_files(files, rows, cols, sort_across=False):
             while col_idx < max_cols:
                 i = row_idx + max_rows * col_idx
                 if i < file_cnt:
-                    print(files[i].ljust(num_chars_per_col, " "), end="")
+                    print(f"{files[i]:<{num_chars_per_col}}", end="")
                 else: break # no more files to process
                 col_idx += 1
             print()
@@ -33,7 +33,7 @@ def print_files(files, rows, cols, sort_across=False):
         while idx < file_cnt:
             col_idx = 0
             while idx < file_cnt and col_idx < max_cols:
-                print(files[idx].ljust(num_chars_per_col, " "), end="")
+                print(f"{files[idx]:<{num_chars_per_col}}", end="")
                 idx += 1
                 col_idx += 1
             print()
@@ -51,7 +51,7 @@ def create_random_files(num_files):
             f.write("")
 
 def main(dir, across=False):
-    # create_random_files(400)
+    create_random_files(400)
     size = os.get_terminal_size()
     print_files(os.listdir(dir), size.lines, size.columns, sort_across=across)
 
